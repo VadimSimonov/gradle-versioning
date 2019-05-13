@@ -4,17 +4,17 @@ buildscript {
         maven { url 'http://bm.glosav.ax:8077/repository/glosav-release' }
         maven { url 'http://bm.glosav.ax:8077/repository/glosav-snapshot' }
         maven { url "https://plugins.gradle.org/m2/" }
+        dependencies {
+            classpath group: 'net.nemerosa', name: 'versioning', version: '2.7.1'
+        }
     }
-}
-
-plugins {
-    id "net.nemerosa.versioning" version "2.8.2"
 }
 
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'idea'
 apply plugin: 'project-report'
+apply plugin: 'net.nemerosa.versioning'
 
 group = "ru.glosav.tools"
 version = "0.0.0"
@@ -34,9 +34,24 @@ repositories {
     maven { url 'http://bm.glosav.ax:8077/repository/glosav-snapshot' }
 }
 
-dependencies {
-    compile('net.nemerosa.versioning:project-report:2.8.2')
+def junitVersion = "5.4.2"
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
+
+
+dependencies {
+    compile gradleApi()
+
+    // Test
+    testCompile("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+}
+
 
 jar {
     dependsOn 'versionFile'
