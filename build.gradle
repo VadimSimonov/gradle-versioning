@@ -1,0 +1,90 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'http://bm.glosav.ax:8077/repository/glosav-release' }
+        maven { url 'http://bm.glosav.ax:8077/repository/glosav-snapshot' }
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+}
+
+plugins {
+    id "net.nemerosa.versioning" version "2.8.2"
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'idea'
+apply plugin: 'project-report'
+
+group = "ru.glosav.tools"
+version = "0.0.0"
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+versioning.info.tag = version
+versioning.info.display = version
+
+versionFile {
+    file = new File(project.buildDir, 'version.properties')
+    prefix = 'VERSION_'
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'http://bm.glosav.ax:8077/repository/glosav-release' }
+    maven { url 'http://bm.glosav.ax:8077/repository/glosav-snapshot' }
+}
+
+dependencies {
+    compile('net.nemerosa.versioning:project-report:2.8.2')
+}
+
+jar {
+    dependsOn 'versionFile'
+    from('build') {
+        include 'version.properties'
+        into 'META-INF'
+    }
+    manifest {
+        attributes(
+                'Build-Jdk'        : "${System.properties['java.version']} (${System.properties['java.vendor']} ${System.properties['java.vm.version']})",
+                'Build-OS'         : "${System.properties['os.name']} ${System.properties['os.arch']} ${System.properties['os.version']}",
+                'Built-By'         : System.properties['user.name'],
+                'Build-Timestamp'  : new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").format(new Date()),
+                'Build-Scm'        : versioning.info.scm,
+                'Build-BranchType' : versioning.info.branchType,
+                'Build-BranchId'   : versioning.info.branchId,
+                'Build-Branch'     : versioning.info.branch,
+                'Build-Commit'     : versioning.info.commit,
+                'Build-Build'      : versioning.info.build,
+                'Build-Full'       : versioning.info.full,
+                'Build-Base'       : versioning.info.base,
+                'Build-Display'    : versioning.info.display,
+                'Build-Dirty'      : versioning.info.dirty,
+                'Build-Tag'        : versioning.info.tag == null ? "undefined" : versioning.info.tag,
+                'Created-By'       : "Gradle ${gradle.gradleVersion}"
+        )
+    }
+}
+
+
+uploadArchives {
+    dependsOn 'clean'
+    dependsOn 'build'
+    tasks.findByName('build').mustRunAfter 'clean'
+    repositories {
+        mavenDeployer {
+            addFilter('jar') { artifact, file ->
+                println "Uploadling: ${artifact}, ${file}"
+                return true
+            }
+            snapshotRepository(
+                url: "${nexusUrl}/repository/glosav-snapshot") {
+                    authentication(userName: nexusUsername, password: nexusPassword)
+            }
+            repository(
+                url: "${nexusUrl}/repository/glosav-release") {
+                    authentication(userName: nexusUsername, password: nexusPassword)
+            }
+        }
+    }
+}
