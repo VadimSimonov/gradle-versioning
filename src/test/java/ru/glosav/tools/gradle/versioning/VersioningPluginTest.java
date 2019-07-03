@@ -20,6 +20,6 @@ public class VersioningPluginTest {
 
         Assertions.assertTrue(project.getPluginManager().hasPlugin("gradle-versioning"));
 
-        Assertions.assertNotNull(project.getTasks().getByName("jar"));
+        //Assertions.assertNotNull(project.getTasks().getByName("hello"));
     }
 }

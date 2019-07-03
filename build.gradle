@@ -4,10 +4,11 @@ buildscript {
         maven { url 'http://bm.glosav.ax:8077/repository/glosav-release' }
         maven { url 'http://bm.glosav.ax:8077/repository/glosav-snapshot' }
         maven { url "https://plugins.gradle.org/m2/" }
-        dependencies {
-            classpath group: 'net.nemerosa', name: 'versioning', version: '2.7.1'
-        }
     }
+    dependencies {
+            classpath group: 'net.nemerosa', name: 'versioning', version: '2.7.1'
+    }
+    
 }
 
 apply plugin: 'java'
@@ -17,7 +18,7 @@ apply plugin: 'project-report'
 apply plugin: 'net.nemerosa.versioning'
 
 group = "ru.glosav.tools"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.5-SNAPSHOT"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 versioning.info.tag = version
@@ -29,6 +30,8 @@ versionFile {
 }
 
 repositories {
+    gradlePluginPortal()
+    mavenLocal()
     mavenCentral()
     maven { url 'http://bm.glosav.ax:8077/repository/glosav-release' }
     maven { url 'http://bm.glosav.ax:8077/repository/glosav-snapshot' }
@@ -46,8 +49,7 @@ test {
 
 dependencies {
     compile gradleApi()
-
-    // Test
+    compile "net.nemerosa:versioning:2.7.1"
     testCompile("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
@@ -92,13 +94,13 @@ uploadArchives {
                 println "Uploadling: ${artifact}, ${file}"
                 return true
             }
-            snapshotRepository(
-                url: "${nexusUrl}/repository/glosav-snapshot") {
-                    authentication(userName: nexusUsername, password: nexusPassword)
-            }
             repository(
-                url: "${nexusUrl}/repository/glosav-release") {
-                    authentication(userName: nexusUsername, password: nexusPassword)
+                    url: "${nexusUrl}/repository/glosav-release") {
+                authentication(userName: nexusUsername, password: nexusPassword)
+            }
+            snapshotRepository(
+                    url: "${nexusUrl}/repository/glosav-snapshot") {
+                authentication(userName: nexusUsername, password: nexusPassword)
             }
         }
     }
