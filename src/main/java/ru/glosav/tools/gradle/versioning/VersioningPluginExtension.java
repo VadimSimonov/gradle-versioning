@@ -1,10 +1,6 @@
 package ru.glosav.tools.gradle.versioning;
 
-/**
- * @author Grigory Panin
- *
- * Расширения плагина версионирования для Gradle
- */
+
 public class VersioningPluginExtension {
 
     private String message = "Message from the plugin!";

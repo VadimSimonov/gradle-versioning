@@ -5,11 +5,7 @@ import org.gradle.testfixtures.ProjectBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-/**
- * @author Grigory Panin
- *
- * Тест плагина версионирования для Gradle
- */
+
 public class VersioningPluginTest {
 
     @Test

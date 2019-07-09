@@ -1,8 +1,12 @@
 buildscript {
     repositories {
+        jcenter()
         mavenCentral()
         maven { url 'http://bm.glosav.ax:8077/repository/glosav-release' }
         maven { url 'http://bm.glosav.ax:8077/repository/glosav-snapshot' }
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
@@ -21,13 +25,13 @@ group = "ru.glosav.tools"
 version = "0.0.5-SNAPSHOT"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-versioning.info.tag = version
-versioning.info.display = version
+/*versioning.info.tag = version
+versioning.info.display = version*/
 
-versionFile {
+/*versionFile {
     file = new File(project.buildDir, 'version.properties')
     prefix = 'VERSION_'
-}
+}*/
 
 repositories {
     gradlePluginPortal()
@@ -55,7 +59,7 @@ dependencies {
 }
 
 
-jar {
+/*jar {
     dependsOn 'versionFile'
     from('build') {
         include 'version.properties'
@@ -81,7 +85,7 @@ jar {
                 'Created-By'       : "Gradle ${gradle.gradleVersion}"
         )
     }
-}
+}*/
 
 
 uploadArchives {
