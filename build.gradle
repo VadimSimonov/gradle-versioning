@@ -43,12 +43,12 @@ repositories {
 
 def junitVersion = "5.4.2"
 
-test {
+/*test {
     useJUnitPlatform()
     testLogging {
         events "passed", "skipped", "failed"
     }
-}
+}*/
 
 
 dependencies {
