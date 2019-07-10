@@ -22,7 +22,7 @@ apply plugin: 'project-report'
 apply plugin: 'net.nemerosa.versioning'
 
 group = "ru.glosav.tools"
-version = "0.0.5-SNAPSHOT"
+version = "0.0.1-SNAPSHOT"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 /*versioning.info.tag = version
@@ -41,7 +41,7 @@ repositories {
     maven { url 'http://bm.glosav.ax:8077/repository/glosav-snapshot' }
 }
 
-def junitVersion = "5.4.2"
+def junitVersion = "5.5.0"
 
 /*test {
     useJUnitPlatform()

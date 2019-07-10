@@ -13,9 +13,7 @@ public class VersioningPluginTest {
 
         Project project = ProjectBuilder.builder().build();
         project.getPluginManager().apply("gradle-versioning");
-
         Assertions.assertTrue(project.getPluginManager().hasPlugin("gradle-versioning"));
-
-        //Assertions.assertNotNull(project.getTasks().getByName("hello"));
+        Assertions.assertNotNull(project.getTasks().getByName("customManifest"));
     }
 }
