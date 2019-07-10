@@ -19,7 +19,7 @@ public class VersioningPlugin implements Plugin<Project> {
     @Override
     public void apply(Project project) {
         VersioningPluginExtension extension = project.getExtensions()
-            .create("greeting", VersioningPluginExtension.class);
+            .create("startClass", VersioningPluginExtension.class);
 
         project.task("customManifest")
             .doLast(task -> {
