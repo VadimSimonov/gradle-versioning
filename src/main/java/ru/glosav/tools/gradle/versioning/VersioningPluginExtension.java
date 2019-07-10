@@ -7,13 +7,13 @@ package ru.glosav.tools.gradle.versioning;
  */
 public class VersioningPluginExtension {
 
-    private String message = "Message from the plugin!";
+    private String startClass;
 
-    public String getMessage() {
-        return message;
+    public String getStartClass() {
+        return startClass;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setStartClass(String startClass) {
+        this.startClass = startClass;
     }
 }

@@ -30,3 +30,4 @@ cc.log
 out/*
 out
 *.directory
+gradle.properties
