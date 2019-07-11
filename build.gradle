@@ -4,17 +4,15 @@ buildscript {
         mavenCentral()
         maven { url 'http://bm.glosav.ax:8077/repository/glosav-release' }
         maven { url 'http://bm.glosav.ax:8077/repository/glosav-snapshot' }
-        maven { url "https://plugins.gradle.org/m2/" }
         maven { url "http://repo.spring.io/snapshot" }
         maven { url "http://repo.spring.io/milestone" }
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-            classpath group: 'net.nemerosa', name: 'versioning', version: '2.7.1'
+        classpath group: 'net.nemerosa', name: 'versioning', version: '2.7.1'
     }
     
 }
-
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'idea'
@@ -22,16 +20,9 @@ apply plugin: 'project-report'
 apply plugin: 'net.nemerosa.versioning'
 
 group = "ru.glosav.tools"
-version = "0.0.4-SNAPSHOT"
+version = "0.0.1-SNAPSHOT"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-/*versioning.info.tag = version
-versioning.info.display = version*/
-
-/*versionFile {
-    file = new File(project.buildDir, 'version.properties')
-    prefix = 'VERSION_'
-}*/
 
 repositories {
     gradlePluginPortal()
@@ -43,13 +34,6 @@ repositories {
 
 def junitVersion = "5.5.0"
 
-/*test {
-    useJUnitPlatform()
-    testLogging {
-        events "passed", "skipped", "failed"
-    }
-}*/
-
 
 dependencies {
     compile gradleApi()
@@ -57,35 +41,6 @@ dependencies {
     testCompile("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
-
-
-/*jar {
-    dependsOn 'versionFile'
-    from('build') {
-        include 'version.properties'
-        into 'META-INF'
-    }
-    manifest {
-        attributes(
-                'Build-Jdk'        : "${System.properties['java.version']} (${System.properties['java.vendor']} ${System.properties['java.vm.version']})",
-                'Build-OS'         : "${System.properties['os.name']} ${System.properties['os.arch']} ${System.properties['os.version']}",
-                'Built-By'         : System.properties['user.name'],
-                'Build-Timestamp'  : new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").format(new Date()),
-                'Build-Scm'        : versioning.info.scm,
-                'Build-BranchType' : versioning.info.branchType,
-                'Build-BranchId'   : versioning.info.branchId,
-                'Build-Branch'     : versioning.info.branch,
-                'Build-Commit'     : versioning.info.commit,
-                'Build-Build'      : versioning.info.build,
-                'Build-Full'       : versioning.info.full,
-                'Build-Base'       : versioning.info.base,
-                'Build-Display'    : versioning.info.display,
-                'Build-Dirty'      : versioning.info.dirty,
-                'Build-Tag'        : versioning.info.tag == null ? "undefined" : versioning.info.tag,
-                'Created-By'       : "Gradle ${gradle.gradleVersion}"
-        )
-    }
-}*/
 
 
 uploadArchives {
