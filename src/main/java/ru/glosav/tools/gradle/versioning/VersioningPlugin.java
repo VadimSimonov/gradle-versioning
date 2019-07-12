@@ -15,11 +15,7 @@ import java.util.*;
 
 import static java.util.Collections.singletonMap;
 
-/**
- * @author Grigory Panin
- * <p>
- * Плагин версионирования для Gradle
- */
+
 public class VersioningPlugin implements Plugin<Project> {
     private static final List<String> plugins = Arrays.asList("java", "idea", "org.springframework.boot");
 
